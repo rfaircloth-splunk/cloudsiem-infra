@@ -3,6 +3,11 @@
 GREEN='\033[0;32m'
 NC='\033[0;0m'
 
+
+apt-get update
+apt-get install -y apt-transport-https curl unzip python3
+easy_install pip
+
 # install kubectl
 echo -e "${GREEN}==== INSTALLING KUBECTL ====${NC}"
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl

@@ -14,9 +14,6 @@ jobs:
       - checkout
 
       - run:
-          command: apt-get update; apt-get install curl unzip -y
-
-      - run:
           command: sh build-scripts/install-dependencies.sh
       - run:
           command: terraform init k8s
