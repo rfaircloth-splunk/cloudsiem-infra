@@ -5,7 +5,7 @@ NC='\033[0;0m'
 
 
 apt-get update
-apt-get install -y apt-transport-https curl unzip python3
+apt-get install -y apt-transport-https curl unzip python3 python-setuptools python-dev build-essential
 easy_install pip
 
 # install kubectl
@@ -28,7 +28,6 @@ echo ''
 echo -e "${GREEN}==== INSTALLING AWS ====${NC}"
 pip install --user awscli
 export PATH=$PATH:$HOME/.local/bin
-chmod +x ./aws
 echo -e "${GREEN}==== SUCCESSFULLY INSTALLED AWS ====${NC}"
 echo ''
 
@@ -37,6 +36,6 @@ echo -e "${GREEN}==== INSTALLING TERRAFORM ====${NC}"
 curl -LO https://releases.hashicorp.com/terraform/0.11.2/terraform_0.11.2_linux_amd64.zip
 unzip terraform_0.11.2_linux_amd64.zip -d ./
 chmod +x ./terraform
-mv terraform /us/local/bin/terraform
+mv terraform /usr/local/bin/terraform
 echo -e "${GREEN}==== SUCCESSFULLY INSTALLED TERRAFORM ====${NC}"
 echo ''
