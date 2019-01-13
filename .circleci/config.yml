@@ -23,6 +23,8 @@ jobs:
       - run:
           command: terraform apply -auto-approve k8s
       - run:
+          command: kops export kubecfg
+      - run:
           command: sh build-scripts/kops-validate.sh
 
   #    - save_cache:
