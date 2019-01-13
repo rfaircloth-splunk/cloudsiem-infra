@@ -7,6 +7,7 @@ jobs:
     environment:
 #      TEST_REPORTS: /tmp/test-reports
       KOPS_STATE_STORE: s3://cloudsiem-kops
+      KOPS_CLUSTER_NAME: prodsvc.cloudsiem.com
 
     working_directory: ~/my-project
 
@@ -21,6 +22,8 @@ jobs:
           command: terraform validate k8s
       - run:
           command: terraform apply -auto-approve k8s
+      - run:
+          command: sh build-scripts/kops-validate.sh
 
   #    - save_cache:
   #        key: v1-my-project-{{ checksum "project.clj" }}
