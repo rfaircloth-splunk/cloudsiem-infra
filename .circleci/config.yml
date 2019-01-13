@@ -18,10 +18,9 @@ jobs:
       - run:
           command: terraform init k8s
       - run:
-          command: terraform apply k8s
+          command: terraform plan k8s
       - run:
-          command: 
-
+          command: terraform apply k8s
 
   #    - save_cache:
   #        key: v1-my-project-{{ checksum "project.clj" }}
