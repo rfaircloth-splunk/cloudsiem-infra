@@ -14,7 +14,12 @@ jobs:
       - checkout
 
       - run:
-          command: sudo sh build-scripts/install-dependencies.sh
+          command: sh build-scripts/install-dependencies.sh
+      - run:
+          command: terraform init k8s
+      - run:
+          command: terraform apply
+
 
   #    - save_cache:
   #        key: v1-my-project-{{ checksum "project.clj" }}
