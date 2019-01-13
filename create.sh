@@ -1,0 +1,17 @@
+kops create cluster --cloud aws \
+ --bastion \
+ --node-count 3 \
+ --node-size m4.large \
+ --master-size t2.medium \
+ --zones us-west-2a \
+ --zones us-west-2a,us-west-2b,us-west-2c \
+ --master-zones us-west-2a,us-west-2b,us-west-2c \
+ --dns-zone cloudsiem.com \
+ --topology private \
+ --networking weave \
+ --authorization RBAC \
+ --cloud-labels "Team=cloudsiem,Owner=Ryan Faircloth" \
+ --name prodsvc.cloudsiem.com \
+ --out=k8s \
+ --ssh-public-key ~/.ssh/id_rsa.pub  \
+ --target=terraform --yes
