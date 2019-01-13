@@ -33,6 +33,10 @@ jobs:
       - run:
           command: kubectl apply -f k8s-manifests/external_dns/external_dns.yaml
       - run:
+          command: kubectl apply -f k8s-manifests/kube2iam
+      - run:
+          command: kubectl apply -f k8s-manifests/rbac
+      - run:
           command: sh build-scripts/kops-validate.sh
 
   #    - save_cache:
