@@ -23,11 +23,11 @@ jobs:
       - run:
           command: terraform apply -auto-approve k8s
       - run:
-          command: terraform init k8s-manifests/external_dns
+          command: pushd k8s-manifests/external_dns; terraform init k8s-manifests/external_dns ; popd
       - run:
-          command: terraform validate k8s-manifests/external_dns
+          command: pushd k8s-manifests/external_dns; terraform validate ; popd
       - run:
-          command: terraform apply -auto-approve k8s-manifests/external_dns
+          command: pushd k8s-manifests/external_dns; terraform apply -auto-approve k8s-manifests/external_dns ; popd
       - run:
           command: kops export kubecfg
       - run:
