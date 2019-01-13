@@ -18,7 +18,9 @@ jobs:
       - run:
           command: terraform init k8s
       - run:
-          command: terraform apply
+          command: terraform apply k8s
+      - run:
+          command: 
 
 
   #    - save_cache:
