@@ -20,7 +20,7 @@ jobs:
       - run:
           command: terraform validate k8s
       - run:
-          command: terraform apply k8s -auto-approve
+          command: terraform apply -auto-approve k8s
 
   #    - save_cache:
   #        key: v1-my-project-{{ checksum "project.clj" }}
