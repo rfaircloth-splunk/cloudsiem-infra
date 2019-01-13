@@ -33,8 +33,8 @@ echo ''
 
 # install terraform
 echo -e "${GREEN}==== INSTALLING TERRAFORM ====${NC}"
-curl -LO https://releases.hashicorp.com/terraform/0.11.2/terraform_0.11.2_linux_amd64.zip
-unzip terraform_0.11.2_linux_amd64.zip -d ./
+curl -LO https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
+unzip terraform_0.11.11_linux_amd64.zip -d ./
 chmod +x ./terraform
 mv terraform /usr/local/bin/terraform
 echo -e "${GREEN}==== SUCCESSFULLY INSTALLED TERRAFORM ====${NC}"
