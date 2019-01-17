@@ -38,8 +38,8 @@ jobs:
           command: kubectl apply -f k8s-manifests/rbac/
       - run:
           command: sh build-scripts/kops-validate.sh
-      - run:
-          command: kubectl apply -f apps/splunk_ns.yaml
+#      - run:
+ #         command: kubectl apply -f apps/splunk_ns.yaml
 #      - run:
 #          command: kubectl -n splunk create configmap nginx-data-www --from-file=apps/nginx/nginx-data-www
 #      - run:
