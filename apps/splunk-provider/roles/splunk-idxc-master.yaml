@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: splunk-idxc-master
+  labels:
+    app: splunk
+    role: splunk-idxc-master
+    tier: management
+  namespace: splunk-provider
+spec:
+  ports:
+  - port: 8000
+    name: web
+  - port: 8089
+    name: mgmt
+  clusterIP: None
+  selector:
+    app: splunk
+    role: splunk-idxc-master
+    tier: management
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: splunk-idxc-master
+  namespace: splunk-provider
+  labels:
+    app: splunk
+    role: splunk-idxc-master
+    tier: management
+spec:
+  selector:
+    matchLabels:
+      app: splunk
+      role: splunk-idxc-master
+      tier: management
+  serviceName: "splunk-idxc-master"
+  replicas: 1
+  volumeClaimTemplates:
+  - metadata:
+      name: splunk-etc
+      labels:
+        app: splunk
+        role: splunk-idxc-master
+        tier: management
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+ #     storageClassName: "gp2"
+      resources:
+        requests:
+          storage: 10Gi
+  template:
+    metadata:
+      labels:
+        app: splunk
+        role: splunk-idxc-master
+        tier: management
+    spec:
+      terminationGracePeriodSeconds: 300
+      dnsPolicy: ClusterFirst
+      hostname: master
+      containers:
+      - name: splunk-idxc-master
+        image: rfaircloth/cloudsiem-splunk:latest
+        ports:
+        - containerPort: 8000
+          name: web
+        - containerPort: 8089
+          name: mgmt
+        volumeMounts:
+        - name: splunk-etc
+          mountPath: /opt/splunk/etc
+        - name: splunk-log
+          mountPath: /opt/splunk/var/log
+        - name: splunk-run
+          mountPath: /opt/splunk/var/run
+        - name: splunk-spool
+          mountPath: /opt/splunk/var/spool
+        env:
+        - name: APP
+          value: splunk
+        - name: ROLE
+          value: splunk-idxc-master
+        - name: SPLUNK_GEN_PASS4SYM
+          value: genpass
+        - name: SPLUNK_ADMIN_USER
+          value: admin
+        - name: SPLUNK_ADMIN_PASSWORD
+          value: Changed@11
+        - name: SPLUNK_IDXC_PASS4SYM
+          value: idxcpass
+
+      volumes:
+      - name: splunk-run
+        emptyDir: {}
+      - name: splunk-spool
+        emptyDir: {}
+      - name: splunk-log
+        emptyDir: {}

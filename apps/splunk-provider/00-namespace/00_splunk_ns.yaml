@@ -1,0 +1,8 @@
+# kubetpl:syntax:$
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    name: $K8S_NAMESPACE
+  name: $K8S_NAMESPACE
